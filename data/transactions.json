@@ -1,0 +1,58 @@
+[
+    {
+        "type": "Expense",
+        "amount": 535.0,
+        "category": "Entertainment",
+        "date": "2024-01-01",
+        "transaction_description": "Computer"
+    },
+    {
+        "type": "Expense",
+        "amount": 39.0,
+        "category": "Auto (Gas, Insurance, Repairs, Payment)",
+        "date": "2025-01-08",
+        "transaction_description": "None"
+    },
+    {
+        "type": "Expense",
+        "amount": 47.5,
+        "category": "Dining Out",
+        "date": "2025-01-12",
+        "transaction_description": "None"
+    },
+    {
+        "type": "Income",
+        "amount": 3900.0,
+        "category": "Paycheck",
+        "date": "2025-01-17",
+        "transaction_description": "MCISD PAYCHECK"
+    },
+    {
+        "type": "Income",
+        "amount": 3900.0,
+        "category": "Paycheck",
+        "date": "2025-01-18",
+        "transaction_description": "MCISD PAYCHECK"
+    },
+    {
+        "type": "Income",
+        "amount": 3950.0,
+        "category": "Paycheck",
+        "date": "2025-02-02",
+        "transaction_description": "Mission CISD"
+    },
+    {
+        "type": "Income",
+        "amount": 1234.5,
+        "category": "Paycheck",
+        "date": "2025-02-02",
+        "transaction_description": "MCISD"
+    },
+    {
+        "type": "Income",
+        "amount": 4444.44,
+        "category": "Paycheck",
+        "date": "2025-02-02",
+        "transaction_description": "Random"
+    }
+]
