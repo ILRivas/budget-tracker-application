@@ -18,37 +18,17 @@ The project requires Python and several dependencies. Install the dependencies l
 
 File Structure
 
-The project structure is organized as follows:
-Budget_Project/
-│
-├── data/
-│   └── transactions.json         # Stores transaction data
-│
-├── gui/
-│   ├── logic/
-│   │   ├── add_transaction_screen_logic.py
-│   │   ├── delete_transaction_screen_logic.py
-│   │   ├── main_menu_logic.py
-│   │   ├── view_monthly_report_screen_logic.py
-│   │
-│   ├── ui_add_transaction.py      # UI for adding transactions
-│   ├── ui_delete_transaction.py   # UI for deleting transactions
-│   ├── ui_main_menu.py            # Main menu UI
-│   └── ui_view_monthly_report.py  # UI for viewing monthly reports
-│
-├── logic/
-│   ├── budgets.py                 # Budget-related calculations
-│   ├── menu_logic.py              # Main menu logic
-│   ├── reports.py                 # Report generation logic
-│   ├── transactions.py            # Core transaction logic
-│   └── utils.py                   # Helper utilities
-│
-├── .gitignore                     # Files and directories ignored by Git
-├── LICENSE                        # License details (GPL-3.0)
-├── main.py                        # Main entry point for the application
-├── README.md                      # Project documentation
-└── requirements.txt               # Python dependencies
 
+The project is organized into the following key directories:
+	•	data/: Contains the transactions.json file to store transaction data.
+	•	gui/:
+	•	Logic files: Define the behavior for each application screen.
+	•	UI files: Automatically generated PySide6 UI scripts for the application interface.
+	•	logic/: Core logic for managing transactions, generating reports, and utility functions.
+	•	main.py: The main entry point to launch the application.
+
+
+    
 Installation and Usage
  1.	Clone the Repository:
     - git clone https://github.com/ILRivas/budget-tracker-application.git 
