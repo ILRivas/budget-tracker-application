@@ -25,6 +25,7 @@ class DeleteTransactionScreenLogic(QDialog):
         """
         Populate the QTableWidget with transactions.
         """
+        load_transactions()
         self.ui.delete_transaction_table.setRowCount(len(self.transactions))
         for row, transaction in enumerate(self.transactions):
             self.ui.delete_transaction_table.setItem(row, 0, QTableWidgetItem(transaction.get("date", "")))

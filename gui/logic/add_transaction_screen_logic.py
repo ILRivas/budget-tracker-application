@@ -49,14 +49,20 @@ class AddTransactionScreenLogic(QDialog):
             print("Transaction added successfully:", added_transaction)
             save_transactions(transactions)
             sort_existing_json()
-            
-            msg_box = QMessageBox(self)
-            msg_box.setIcon(QMessageBox.Information)
-            msg_box.setWindowTitle("Success")
-            msg_box.setText("Transaction added successfully!")
-            msg_box.setStandardButtons(QMessageBox.Ok)
-            msg_box.exec()
-            self.accept()
+            response = QMessageBox.question(
+                self,
+                "Transaction Added",
+                "Transaction added successfully! Would you like to add another?",
+                QMessageBox.Yes | QMessageBox.No
+            )
+            if response == QMessageBox.Yes:
+                self.ui.amount_input.clear()
+                self.ui.lineEdit_2.clear()
+                self.ui.date_input.setDate(self.ui.date_input.minimumDate())
+                self.ui.type_input.setCurrentIndex(0)
+                self.ui.comboBox.setCurrentIndex(0)
+            else:
+                self.accept()
         except ValueError as e:
             print("Error adding transaction:", e)
         

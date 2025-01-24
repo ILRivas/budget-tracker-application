@@ -137,7 +137,7 @@ class Ui_Dialog(object):
         self.back_pushButton = QPushButton(Dialog)
         self.back_pushButton.setObjectName(u"back_pushButton")
         self.back_pushButton.setFont(font3)
-        self.button_layout.addWidget(self.back_pushButton, 0, 1)
+        self.button_layout.addWidget(self.back_pushButton, 0, 2)
         self.layout.addLayout(self.button_layout)
 
         self.retranslateUi(Dialog)
