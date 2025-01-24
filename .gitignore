@@ -1,2 +1,4 @@
 #Exclude Virtual Environment
 **myenv/
+myenv/lib/python3.9/site-packages/PySide6/lupdate
+myenv/*
