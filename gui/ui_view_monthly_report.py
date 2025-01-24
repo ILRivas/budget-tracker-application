@@ -116,6 +116,19 @@ class Ui_Dialog(object):
         self.net_balance_label.setFont(font5)
         self.summary_layout.addWidget(self.net_balance_label)
 
+        # Add a table for category breakdown
+        self.category_breakdown_table = QTableWidget(self.scroll_widget)
+        self.category_breakdown_table.setObjectName(u"category_breakdown_table")
+        font6 = QFont()
+        font6.setPointSize(16)
+        font6.setBold(True)
+        self.category_breakdown_table.setFont(font6)
+        self.category_breakdown_table.setColumnCount(2)  # Two columns: Category and Amount
+        self.category_breakdown_table.setHorizontalHeaderLabels(["Category", "Amount"])
+        self.category_breakdown_table.horizontalHeader().setStretchLastSection(True)
+        self.category_breakdown_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.scroll_layout.addWidget(self.category_breakdown_table)
+
         self.scroll_layout.addLayout(self.summary_layout)
         self.scroll_area.setWidget(self.scroll_widget)
         self.layout.addWidget(self.scroll_area)
@@ -127,13 +140,13 @@ class Ui_Dialog(object):
         self.export_pushButton.setFont(font3)
         self.button_layout.addWidget(self.export_pushButton, 0, 0)
 
-        #ViewTable Button
+        # ViewTable Button
         self.view_chart_pushButton = QPushButton(Dialog)
         self.view_chart_pushButton.setObjectName(u"view_chart_pushButton")
         self.view_chart_pushButton.setFont(font3)
-        self.button_layout.addWidget(self.view_chart_pushButton, 0 , 1)
+        self.button_layout.addWidget(self.view_chart_pushButton, 0, 1)
 
-        #Back Button
+        # Back Button
         self.back_pushButton = QPushButton(Dialog)
         self.back_pushButton.setObjectName(u"back_pushButton")
         self.back_pushButton.setFont(font3)

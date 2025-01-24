@@ -1,11 +1,6 @@
 import os
 import json
 from datetime import datetime
-from collections import defaultdict
-
-## Constants
-VALID_TRANSACTION_TYPES = ["Income", "Expense"]
-
 
 ############################ Loading and saving into transactions.json###########
 def save_transactions(transaction_list, filename="data/transactions.json"):

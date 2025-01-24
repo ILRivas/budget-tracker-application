@@ -2,7 +2,7 @@ import json
 from PySide6.QtWidgets import QDialog, QTableWidgetItem, QMessageBox, QAbstractItemView
 from PySide6.QtCore import Qt
 from gui.ui_delete_transaction import Ui_Dialog
-from logic.transactions import load_transactions, save_transactions, sort_existing_json
+from gui.logic.utils import load_transactions, save_transactions, sort_existing_json
 class DeleteTransactionScreenLogic(QDialog):
     def __init__(self, transactions_file = "data/transactions.json"):
         super().__init__()

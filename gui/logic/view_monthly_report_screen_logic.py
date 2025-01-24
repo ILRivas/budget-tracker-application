@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QDialog, QTableWidgetItem, QAbstractItemView, QMessageBox, QHeaderView, QFileDialog
 from gui.ui_view_monthly_report import Ui_Dialog
 import csv
-from logic.transactions import load_transactions
+from gui.logic.utils import load_transactions
 
 # Load transactions from JSON file
 transactions = load_transactions("data/transactions.json")
@@ -19,6 +20,7 @@ class ViewMonthlyReportLogic(QDialog):
         self.ui.expense_label.setVisible(False)
         self.ui.income_label.setVisible(False)
         self.ui.net_balance_label.setVisible(False)
+        self.ui.category_breakdown_table.setVisible(False)
         # Adjust column sizes and table behavior
         self.ui.monthly_report_table.resizeColumnsToContents()
         self.ui.monthly_report_table.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -66,7 +68,10 @@ class ViewMonthlyReportLogic(QDialog):
                 QMessageBox.Ok
             )
             return
-
+        #Set font for tables.
+        table_font = QFont()
+        table_font.setPointSize(14)
+        table_font.setBold(False)
         # Populate the table with filtered transactions
         self.populate_table(filtered_transactions)
         #Calculate net_balance
@@ -78,6 +83,17 @@ class ViewMonthlyReportLogic(QDialog):
         self.ui.expense_label.setText(f"Total Expenses: ${total_expenses:.2f}")
         self.ui.net_balance_label.setText(f"Net Balance: ${net_balance:.2f}")
 
+        spending_by_category = {}
+        for transaction in filtered_transactions:
+            if transaction["type"].lower() == "expense":
+                category = transaction["category"]
+                spending_by_category[category] = spending_by_category.get(category, 0) + transaction["amount"]
+
+        self.ui.category_breakdown_table.setRowCount(len(spending_by_category))
+        self.ui.category_breakdown_table.setFont(table_font)
+        for row, (category, amount) in enumerate(spending_by_category.items()):
+            self.ui.category_breakdown_table.setItem(row, 0, QTableWidgetItem(category))
+            self.ui.category_breakdown_table.setItem(row, 1, QTableWidgetItem(f"${amount:.2f}"))
 
         # Make the table and export button visible
         self.ui.expense_label.setVisible(True)
@@ -85,6 +101,7 @@ class ViewMonthlyReportLogic(QDialog):
         self.ui.net_balance_label.setVisible(True)
         self.ui.monthly_report_table.setVisible(True)
         self.ui.export_pushButton.setVisible(True)
+        self.ui.category_breakdown_table.setVisible(True)
 
         #adjust the table column widths to fill the table
         self.ui.monthly_report_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
