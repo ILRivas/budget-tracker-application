@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtGui import QDoubleValidator
-from gui.ui_add_transaction import Ui_Dialog
+from gui.ui.ui_add_transaction import Ui_Dialog
 from PySide6.QtWidgets import QDialog
 from gui.logic.utils import load_transactions, save_transactions, sort_existing_json
 

@@ -1,6 +1,6 @@
 # main_menu_logic.py
 from PySide6.QtWidgets import QMainWindow, QApplication
-from gui.ui_main_menu import Ui_Form
+from gui.ui.ui_main_menu import Ui_Form
 from gui.logic.add_transaction_screen_logic import AddTransactionScreenLogic
 from gui.logic.delete_transaction_screen_logic import DeleteTransactionScreenLogic
 from gui.logic.view_monthly_report_screen_logic import ViewMonthlyReportLogic

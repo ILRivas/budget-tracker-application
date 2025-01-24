@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QDialog, QTableWidgetItem, QAbstractItemView, QMessageBox, QHeaderView, QFileDialog
-from gui.ui_view_monthly_report import Ui_Dialog
+from gui.ui.ui_view_monthly_report import Ui_Dialog
 import csv
 from gui.logic.utils import load_transactions
 

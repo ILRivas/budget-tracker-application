@@ -112,7 +112,7 @@ class Ui_Form(object):
         self.add_trans_button.setText(QCoreApplication.translate("Form", u"Add Transaction", None))
         self.del_trans_button.setText(QCoreApplication.translate("Form", u"Delete Transaction", None))
         self.month_summ_button.setText(QCoreApplication.translate("Form", u"View Monthly Summary", None))
-        self.export_csv_button.setText(QCoreApplication.translate("Form", u"Export to CSV (Month)", None))
+        self.export_csv_button.setText(QCoreApplication.translate("Form", u"Manage Budgets", None))
         self.exit_button.setText(QCoreApplication.translate("Form", u"Exit", None))
     # retranslateUi
 
