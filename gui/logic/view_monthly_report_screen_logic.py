@@ -207,25 +207,39 @@ class ViewMonthlyReportLogic(QDialog):
         if not spending_by_category:
             QMessageBox.warning(self, "No Data", f"No expenses found to display in the chart.")
             return
-        #Generate Pie Chart
+
+        # Generate Pie Chart
         categories = list(spending_by_category.keys())
         amounts = list(spending_by_category.values())
 
-        plt.figure(figsize=(8,8))
-        plt.pie(amounts, labels=categories, autopct="%1.1f%%", startangle=140)
+        # Custom function to format the labels with percentage and amount
+        def autopct_format(pct, all_values):
+            total = sum(all_values)
+            value = pct * total / 100
+            return f"{pct:.1f}%\n(${value:.2f})"
+
+        plt.figure(figsize=(8, 8))
+        plt.pie(
+            amounts,
+            labels=categories,
+            autopct=lambda pct: autopct_format(pct, amounts),  # Use custom format
+            startangle=140,
+        )
         plt.title(f"Spending by Category - {month:02d}/{year}")
         plt.show()
 
+        # Populate the category breakdown table
         self.ui.category_breakdown_table.setRowCount(0)
         for row, (category, amount) in enumerate(spending_by_category.items()):
             self.ui.category_breakdown_table.insertRow(row)
-            self.ui.category_breakdwn_table.setItem(row, 0, QTableWidgetItem(category))
+            self.ui.category_breakdown_table.setItem(row, 0, QTableWidgetItem(category))
             self.ui.category_breakdown_table.setItem(row, 1, QTableWidgetItem(f"${amount:.2f}"))
 
+        # Enable export chart button and set its action
         self.ui.export_chart_pushButton.setEnabled(True)
         self.ui.export_chart_pushButton.clicked.disconnect()
         self.ui.export_chart_pushButton.clicked.connect(lambda: self.export_chart(spending_by_category, month, year))
-
+    
     def export_chart(self, spending_by_category, month, year):
         """
         Export the pie chart and numerical breakdown.
