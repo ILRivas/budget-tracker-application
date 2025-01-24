@@ -2,8 +2,7 @@ from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtGui import QDoubleValidator
 from gui.ui_add_transaction import Ui_Dialog
 from PySide6.QtWidgets import QDialog
-from logic.transactions import add_transaction
-from logic.transactions import load_transactions, save_transactions, sort_existing_json
+from gui.logic.utils import load_transactions, save_transactions, sort_existing_json
 
 transactions = load_transactions()
 
@@ -22,6 +21,37 @@ class AddTransactionScreenLogic(QDialog):
         validator = QDoubleValidator(0.0, 999999.99, 2)
         self.ui.amount_input.setValidator(validator)
 
+        
+    def add_transaction(self, date, t_type, amount, category, description):
+        """
+        Adds a new transaction to the list and saves it to the JSON file.
+        """
+        try:
+            # Validate input data
+            if not date or not t_type or not amount or not category:
+                raise ValueError("All fields except 'description' are required.")
+
+            # Create the transaction dictionary
+            transaction = {
+                "date": date,
+                "type": t_type,
+                "amount": amount,
+                "category": category,
+                "transaction_description": description or None,
+            }
+
+            # Append to the transactions list
+            transactions.append(transaction)
+
+            # Save the updated transactions and sort the JSON
+            save_transactions(transactions)
+            sort_existing_json()
+
+            return transaction
+        except Exception as e:
+            print(f"Error adding transaction: {e}")
+            raise
+
     def submit_transaction(self):
         """
         Handle the submission of the form.
@@ -37,7 +67,7 @@ class AddTransactionScreenLogic(QDialog):
         print(self.ui.lineEdit_2.text())
         try:
         # Pass arguments to the add_transaction function in the correct order
-            added_transaction = add_transaction(
+            added_transaction = self.add_transaction(
                 transactions,
                 transaction_data["date"],
                 transaction_data["t_type"],
