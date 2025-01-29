@@ -4,6 +4,7 @@ from gui.ui.ui_main_menu import Ui_Form
 from gui.logic.add_transaction_screen_logic import AddTransactionScreenLogic
 from gui.logic.delete_transaction_screen_logic import DeleteTransactionScreenLogic
 from gui.logic.view_monthly_report_screen_logic import ViewMonthlyReportLogic
+from gui.logic.manage_budget_logic import ManageBudgetLogic
 
 class MainMenuLogic(QMainWindow):
     def __init__(self):
@@ -15,6 +16,7 @@ class MainMenuLogic(QMainWindow):
         self.ui.add_trans_button.clicked.connect(self.open_add_transaction_screen)
         self.ui.del_trans_button.clicked.connect(self.open_delete_transaction_screen)
         self.ui.month_summ_button.clicked.connect(self.open_view_monthly_report_screen)
+        self.ui.set_budget_button.clicked.connect(self.open_manage_budget_screen)
         self.ui.exit_button.clicked.connect(self.exit_application)
 
     def open_add_transaction_screen(self):
@@ -29,6 +31,10 @@ class MainMenuLogic(QMainWindow):
     def open_view_monthly_report_screen(self):
         self.view_monthly_report_screen = ViewMonthlyReportLogic()
         self.view_monthly_report_screen.show()
+    
+    def open_manage_budget_screen(self):
+        self.manage_budget_screen = ManageBudgetLogic()
+        self.manage_budget_screen.show()
 
 
     def exit_application(self):

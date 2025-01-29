@@ -1,0 +1,32 @@
+{
+    "2025-01": {
+        "Debt Payment": {
+            "budget": 400.0,
+            "spent": 198.5
+        },
+        "Phone Payment": {
+            "budget": 230.0,
+            "spent": 220.45
+        },
+        "Auto (Gas, Insurance, Repairs, Payment)": {
+            "budget": 40.0,
+            "spent": 39.0
+        },
+        "Paycheck": {
+            "budget": 0.0,
+            "spent": 0.0
+        },
+        "Dining Out": {
+            "budget": 300.0,
+            "spent": 138.0
+        },
+        "Utilities": {
+            "budget": 300.0,
+            "spent": 116.8
+        },
+        "Entertainment": {
+            "budget": 90.0,
+            "spent": 0.0
+        }
+    }
+}

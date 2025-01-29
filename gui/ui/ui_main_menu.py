@@ -87,11 +87,11 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.month_summ_button)
 
-        self.export_csv_button = QPushButton(self.widget)
-        self.export_csv_button.setObjectName(u"export_csv_button")
-        self.export_csv_button.setAutoFillBackground(True)
+        self.set_budget_button = QPushButton(self.widget)
+        self.set_budget_button.setObjectName(u"set_budget_button")
+        self.set_budget_button.setAutoFillBackground(True)
 
-        self.verticalLayout.addWidget(self.export_csv_button)
+        self.verticalLayout.addWidget(self.set_budget_button)
 
         self.exit_button = QPushButton(self.widget)
         self.exit_button.setObjectName(u"exit_button")
@@ -112,7 +112,7 @@ class Ui_Form(object):
         self.add_trans_button.setText(QCoreApplication.translate("Form", u"Add Transaction", None))
         self.del_trans_button.setText(QCoreApplication.translate("Form", u"Delete Transaction", None))
         self.month_summ_button.setText(QCoreApplication.translate("Form", u"View Monthly Summary", None))
-        self.export_csv_button.setText(QCoreApplication.translate("Form", u"Manage Budgets", None))
+        self.set_budget_button.setText(QCoreApplication.translate("Form", u"Manage Budgets", None))
         self.exit_button.setText(QCoreApplication.translate("Form", u"Exit", None))
     # retranslateUi
 
