@@ -69,6 +69,7 @@ class ManageBudgetLogic(QDialog):
 
         # Calculate spent amounts per category
         spent_per_category = {}
+        total_income = 0
         selected_month = self.ui.manage_budgets_month_spinbox.value()
         selected_year = self.ui.manage_budgets_year_spinbox.value()
 
@@ -76,10 +77,13 @@ class ManageBudgetLogic(QDialog):
             try:
                 t_month = int(transaction["date"].split("-")[1])
                 t_year = int(transaction["date"].split("-")[0])
-                if t_month == selected_month and t_year == selected_year and transaction["type"].lower() == "expense":
+                if t_month == selected_month and t_year == selected_year:
                     category = transaction["category"]
                     amount = float(transaction["amount"])
-                    spent_per_category[category] = spent_per_category.get(category, 0) + amount
+                    if transaction["type"].lower() == "income":
+                        total_income += amount
+                    elif transaction["type"].lower() == "expense":
+                        spent_per_category[category] = spent_per_category.get(category, 0) + amount 
             except (KeyError, ValueError):
                 continue  # Skip any invalid transactions
 
@@ -89,15 +93,15 @@ class ManageBudgetLogic(QDialog):
         # Get all categories (both from budgets and transactions)
         all_categories = set(budget_data.keys()).union(spent_per_category.keys())
 
-        # TEMP FIX: If all_categories is empty, set predefined categories
-        if not all_categories:
-            all_categories = {"Entertainment", "Utilities", "Paycheck", "Phone Payment",
-                            "Auto (Gas, Insurance, Repairs, Payment)", "Dining Out", "Debt Payment"}
-
-        print("Final Categories Being Processed:", all_categories)  # Debugging
+        # Ensure predefined categories are always present
+        predefined_categories = {"Entertainment", "Utilities", "Phone Payment",
+                                "Auto (Gas, Insurance, Repairs, Payment)", "Dining Out", "Debt Payment"}
+        all_categories.update(predefined_categories)
 
         # Update budget data dynamically
         updated_budget_data = {}
+        total_budgeted = 0
+        user_savings_goal = budget_data.get("Savings", {}).get("budget", 0)
         for category in all_categories:
             budget_amount = budget_data.get(category, {}).get("budget", 0)
             spent_amount = spent_per_category.get(category, 0)
@@ -108,11 +112,15 @@ class ManageBudgetLogic(QDialog):
                 "spent": spent_amount,
                 "remaining": remaining
             }
+            total_budgeted += budget_amount
+
+        # Calculate potential savings
+        potential_savings = total_income - total_budgeted
 
         # Populate the table with updated data
-        self.populate_budget_table(updated_budget_data)
+        self.populate_budget_table(updated_budget_data, user_savings_goal, potential_savings)
 
-    def populate_budget_table(self, budget_data):
+    def populate_budget_table(self, budget_data, user_savings_goal, potential_savings):
         """
         Fill the budget table with budget values.
         """
@@ -146,6 +154,21 @@ class ManageBudgetLogic(QDialog):
             progress_widget.setValue(progress)
             progress_widget.setFormat(f"{progress}%")  # Display percentage
             self.ui.manage_budgets_table.setCellWidget(row, 4, progress_widget)  # Add to table
+
+        # Add Savings Rows that are editable
+        row += 1
+        self.ui.manage_budgets_table.insertRow(row)
+        savings_item = QTableWidgetItem("Savings Goal")
+        savings_item.setFlags(savings_item.flags() & ~Qt.ItemIsEditable)
+        self.ui.manage_budgets_table.setItem(row, 0, savings_item)
+
+        savings_goal_item = QTableWidgetItem(f"{user_savings_goal:.2f}")
+        savings_goal_item.setFlags(savings_goal_item.flags() | Qt.ItemIsEditable)  # Allow editing
+        self.ui.manage_budgets_table.setItem(row, 1, savings_goal_item)
+
+        potential_savings_item = QTableWidgetItem(f"{potential_savings:.2f}")
+        potential_savings_item.setFlags(potential_savings_item.flags() & ~Qt.ItemIsEditable)  # Read-only
+        self.ui.manage_budgets_table.setItem(row, 3, potential_savings_item)
 
     def save_budget(self):
         """

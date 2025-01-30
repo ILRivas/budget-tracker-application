@@ -68,7 +68,6 @@ class AddTransactionScreenLogic(QDialog):
         try:
         # Pass arguments to the add_transaction function in the correct order
             added_transaction = self.add_transaction(
-                transactions,
                 transaction_data["date"],
                 transaction_data["t_type"],
                 transaction_data["amount"],

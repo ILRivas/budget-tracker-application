@@ -1,19 +1,5 @@
 [
     {
-        "type": "Income",
-        "amount": 1000.5,
-        "category": "Paycheck",
-        "date": "2000-01-01",
-        "transaction_description": null
-    },
-    {
-        "type": "Expense",
-        "amount": 535.0,
-        "category": "Entertainment",
-        "date": "2024-01-01",
-        "transaction_description": "Computer"
-    },
-    {
         "type": "Expense",
         "amount": 39.0,
         "category": "Auto (Gas, Insurance, Repairs, Payment)",
@@ -68,5 +54,12 @@
         "category": "Debt Payment",
         "date": "2025-01-26",
         "transaction_description": "SST Payment"
+    },
+    {
+        "date": "2025-01-27",
+        "type": "expense",
+        "amount": 700.0,
+        "category": "Debt Payment",
+        "transaction_description": "Citi Credit Card"
     }
 ]
